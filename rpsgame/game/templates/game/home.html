@@ -1,0 +1,11 @@
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <h2>Welcome to Rock Paper Scissors!</h2>
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'play' %}" class="btn">Play Game</a></p>
+        <p><a href="{% url 'history' %}">View your game history</a></p>
+    {% else %}
+        <p>Please <a href="{% url 'login' %}">login</a> to play.</p>
+    {% endif %}
+{% endblock %}

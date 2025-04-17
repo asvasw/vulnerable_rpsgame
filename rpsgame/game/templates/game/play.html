@@ -1,0 +1,15 @@
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <h2>Make your choice</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="choices">
+            <button type="submit" name="choice" value="R" class="choice-btn">Rock</button>
+            <button type="submit" name="choice" value="P" class="choice-btn">Paper</button>
+            <button type="submit" name="choice" value="S" class="choice-btn">Scissors</button>
+        </div>
+    </form>
+    <p><a href="{% url 'history' %}">View your game history</a></p>
+    <p><a href="{% url 'high_score_table' %}">View high scores</a></p>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <h2>Your Game History</h2>
+    {% for game in games %}
+        <div class="history-item">
+            <p>Date: {{ game.created_at }}</p>
+            <p>Your choice: {{ game.get_player_choice_display }}</p>
+            <p>Computer's choice: {{ game.get_computer_choice_display }}</p>
+            <p>Result: {{ game.result }}</p>
+        </div>
+    {% empty %}
+        <p>No games played yet.</p>
+    {% endfor %}
+    <p><a href="{% url 'play' %}">Play a new game</a></p>
+{% endblock %}

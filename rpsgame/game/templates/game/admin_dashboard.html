@@ -1,0 +1,65 @@
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <h2>Admin Dashboard</h2>
+    
+    <div class="admin-stats">
+        <h3>Game Statistics</h3>
+        <p>Total Users: {{ total_users }}</p>
+        <p>Total Games: {{ total_games }}</p>
+        <p>User Wins: {{ user_wins }}</p>
+        <p>Computer Wins: {{ computer_wins }}</p>
+        <p>Ties: {{ ties }}</p>
+    </div>
+    
+    <h3>User Statistics</h3>
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Games Played</th>
+                <th>Last Login</th>
+                <th>Date Joined</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in user_stats %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.game_count }}</td>
+                <td>{{ user.last_login }}</td>
+                <td>{{ user.date_joined }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <h3>Recent Games</h3>
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Result</th>
+                <th>Player Choice</th>
+                <th>Computer Choice</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in recent_games %}
+            <tr>
+                <td>{{ game.player.username }}</td>
+                <td>{{ game.result }}</td>
+                <td>{{ game.get_player_choice_display }}</td>
+                <td>{{ game.get_computer_choice_display }}</td>
+                <td>{{ game.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="admin-links">
+        <p><a href="{% url 'admin:index' %}">Go to Django Admin</a></p>
+        <p><a href="{% url 'home' %}">Return to Homepage</a></p>
+    </div>
+{% endblock %}

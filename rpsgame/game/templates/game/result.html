@@ -1,0 +1,12 @@
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <h2>Game Result</h2>
+    <div class="result">
+        <p>Your choice: {{ player_choice }}</p>
+        <p>Computer's choice: {{ computer_choice }}</p>
+        <h3>{{ result }}</h3>
+    </div>
+    <p><a href="{% url 'play' %}">Play again</a></p>
+    <p><a href="{% url 'history' %}">View your game history</a></p>
+{% endblock %}

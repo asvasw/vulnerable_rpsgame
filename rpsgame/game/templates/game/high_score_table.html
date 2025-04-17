@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Score Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .limit-form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .limit-form input {
+            padding: 8px;
+            width: 50px;
+            margin-right: 10px;
+        }
+        .limit-form button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .limit-form button:hover {
+            background-color: #0056b3;
+        }
+        .return-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .return-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>High Score Table</h1>
+
+    <!-- Display High Scores -->
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Player Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if high_scores %}
+                {% for score in high_scores %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ score.player_name }}</td>
+                        <td>{{ score.score }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3">No high scores available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <!-- Limit Form -->
+    <div class="limit-form">
+        <form method="GET" action="{% url 'high_score_table' %}">
+            <label for="limit">Show top:</label>
+            <input type="number" id="limit" name="limit" value="{{ request.GET.limit|default:'10' }}" min="1" max="100">
+            <button type="submit">Update</button>
+        </form>
+    </div>
+
+    <!-- Return to Play Button -->
+    <a href="{% url 'play' %}" class="return-button">Return to Play</a>
+
+</body>
+</html>
